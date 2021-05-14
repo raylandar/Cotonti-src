@@ -280,7 +280,8 @@ class XTemplate
 	 * @param array $m PCRE matches
 	 * @return string
 	 */
-	private static function restart_include_files($m)
+	//private static function restart_include_files($m)
+	private function restart_include_files($m)
 	{
 		$fname = preg_replace_callback('`\{((?:[\w\.\-]+)(?:\|.+?)?)\}`', 'XTemplate::substitute_var', $m[2]);
 		if (preg_match('`\.tpl$`i', $fname) && file_exists($fname))
@@ -398,9 +399,10 @@ class XTemplate
 	 * @param array $m PCRE matches
 	 * @return string
 	 */
-	private static function substitute_var($m)
+	private function substitute_var($m)
 	{
 		$var = new Cotpl_var($m[1]);
+		//return $var->evaluate($this);
 		return $var->evaluate($this);
 	}
 
